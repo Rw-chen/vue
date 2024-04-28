@@ -8,17 +8,23 @@
             <header>
                 <h1>
                     {{detailObj.title}}
-                    <!-- <a :href="'#/DetailShare?aid='+detailObj.id" target="_blank">
-                        {{detailObj.title}}
-                    </a> -->
                 </h1>
                 <h2>
-                    <i class="fa fa-fw fa-user"></i>{{ detailObj.nickName }}发表于 <span >{{detailObj.createTime}}</span> •
+                    <i class="fa fa-fw fa-user"></i>{{ detailObj.nickName }} 发表于 <span >{{detailObj.createTime}}</span> •
                     <i class="fa fa-fw fa-eye"></i>{{detailObj.viewCount}} 次围观 •
                 </h2>
                 <div class="ui label">
-                    <a :href="'#/Share?classId='+detailObj.categoryId">{{detailObj.categoryName}}</a>
+                    <a v-if="detailObj.categoryId != undefined" :href="'#/Share?classId='+detailObj.categoryId">{{detailObj.categoryName}}</a>
+                    <a v-else>未分类</a>
                 </div>
+
+                <p></p>
+                <div class="tag-container">  
+                    <span class="tag" v-for="(item) in detailObj.tags">{{item}}</span>  
+                </div>
+                <p></p>
+
+
             </header> 
             <div class="article-content markdown-body" v-html="detailObj.content"></div>
 
@@ -86,6 +92,33 @@ import { mavonEditor } from 'mavon-editor'
 </script>
 
 <style lang="less">
+
+.tag-container {  
+                /* 不需要特殊的容器样式，除非你想添加一些间距或内边距 */  
+                padding: 10px; /* 可选：添加一些内边距 */  
+            }  
+            
+.tag {  
+    display: inline-block; /* 让标签横向排列 */  
+    background-color: rgb(151,223,253); /* 使用一个生动的颜色 */  
+    color: #ffffff; /* 使用对比色来确保文字可见 */  
+    border-radius: 5px; /* 圆角使标签看起来更柔和 */  
+    padding: 5px 10px; /* 内边距使标签看起来不那么紧凑 */  
+    margin-right: 10px; /* 右边距使标签之间有一些空间 */  
+    font-size: 14px; /* 设置字体大小 */  
+    cursor: pointer; /* 鼠标悬停时显示手形图标 */  
+    transition: background-color 0.3s ease; /* 平滑的背景色过渡效果 */  
+}  
+
+/* 移除最后一个标签的右边距，使它们看起来更整齐 */  
+.tag:last-child {  
+    margin-right: 0;  
+}  
+
+/* 鼠标悬停效果 */  
+.tag:hover {  
+    background-color: rgb(255,192,153); /* 悬停时改变背景色 */  
+}
 
 .detailBox .article-content{
     font-size: 15px;

@@ -1,0 +1,46 @@
+<html>
+
+    <head>
+        <style>
+
+            .tag-container {  
+                /* 不需要特殊的容器样式，除非你想添加一些间距或内边距 */  
+                padding: 10px; /* 可选：添加一些内边距 */  
+            }  
+            
+            .tag {  
+                display: inline-block; /* 让标签横向排列 */  
+                background-color: #ff9966; /* 使用一个生动的颜色 */  
+                color: #ffffff; /* 使用对比色来确保文字可见 */  
+                border-radius: 5px; /* 圆角使标签看起来更柔和 */  
+                padding: 5px 10px; /* 内边距使标签看起来不那么紧凑 */  
+                margin-right: 10px; /* 右边距使标签之间有一些空间 */  
+                font-size: 14px; /* 设置字体大小 */  
+                cursor: pointer; /* 鼠标悬停时显示手形图标 */  
+                transition: background-color 0.3s ease; /* 平滑的背景色过渡效果 */  
+            }  
+            
+            /* 移除最后一个标签的右边距，使它们看起来更整齐 */  
+            .tag:last-child {  
+                margin-right: 0;  
+            }  
+            
+            /* 鼠标悬停效果 */  
+            .tag:hover {  
+                background-color: #271617; /* 悬停时改变背景色 */  
+            }
+
+        </style>
+
+    </head>
+
+    <body>
+        <div class="tag-container">  
+            <span class="tag">标签1</span>  
+            <span class="tag">标签2</span>  
+            <span class="tag">标签3</span>  
+            <!-- 可以继续添加更多的标签 -->  
+        </div>
+    </body>
+
+</html>

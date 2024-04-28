@@ -1,12 +1,8 @@
-  <template>
+<template>
   <div class="dashboard-container">
-    <div class="dashboard-text">
-      欢迎登录 湖北工业大学工程技术学院 校园博客管理系统
+    <div class="dashboard-text">欢迎登录-湖北工业大学工程技术学院-校园博客管理系统</div>
+    <div class="content"></div>
     </div>
-    <div class="content">
-      
-    </div>
-  </div>
 </template>
 
 <script>

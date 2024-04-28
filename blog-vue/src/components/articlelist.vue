@@ -14,13 +14,14 @@
                     </a>
                 </h1>
                 <h2>
-                    <i class="fa fa-fw fa-user"></i>发表于
+                    <i class="fa fa-fw fa-user"></i> {{ item.nickName }} 发表于
                     <i class="fa fa-fw fa-clock-o"></i><span v-html="showInitDate(item.createTime,'all')">{{showInitDate(item.createTime,'all')}}</span> •
                     <i class="fa fa-fw fa-eye"></i>{{item.viewCount}} 次围观 •
 
                 </h2>
                 <div class="ui label">
-                    <a :href="'#/Share?classId='+item.class_id">{{item.categoryName}}</a>
+                    <a v-if="item.categoryId != undefined" :href="'#/Share?classId='+item.categoryId">{{item.categoryName}}</a>
+                    <a v-else>未分类</a>
                 </div>
             </header>
             <div class="article-content">

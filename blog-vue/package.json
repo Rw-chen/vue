@@ -1,11 +1,11 @@
 {
-  "name": "sg-vue-blog",
+  "name": "vue-blog",
   "version": "1.0.0",
-  "description": "三更博客",
-  "author": "三更",
+  "description": "博客",
+  "author": "xx",
   "private": true,
   "scripts": {
-    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
+    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js --host 0.0.0.0",
     "start": "npm run dev",
     "build": "node build/build.js"
   },

@@ -21,7 +21,6 @@
                 :label="category.name"
                 :value="category.id"
               />
-              <!-- <el-option :key="'1'" label="女" :value="'1'" /> -->
             </el-select>
           </el-form-item>
         </el-col>
@@ -47,8 +46,8 @@
          <el-col :span="6">
           <el-form-item label="允许评论">
             <el-radio-group v-model="form.isComment">
-              <el-radio :key="'0'" :label="'0'">停用</el-radio>
               <el-radio :key="'1'" :label="'1'">正常</el-radio>
+              <el-radio :key="'0'" :label="'0'">停用</el-radio>
             </el-radio-group>
           </el-form-item>
         </el-col>
@@ -95,6 +94,7 @@
 
         </el-col>
       </el-row>
+
       <el-row>
         <mavon-editor ref="md" v-model="form.content" @imgAdd="addImg" />
       </el-row>
@@ -179,6 +179,7 @@ export default {
       })
     },
     fileRemove(file, fileList) {
+      this.form.thumbnail = ""
       this.fileList.pop()
     },
     // 绑定@imgAdd event

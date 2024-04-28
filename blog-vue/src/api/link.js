@@ -12,3 +12,11 @@ export function getAllLink(query) {
     })
 }
 
+// 添加友链
+export function addLink(data) {
+  return request({
+      url: '/link/addLink',
+      method: 'post',
+      data: data
+  })
+}

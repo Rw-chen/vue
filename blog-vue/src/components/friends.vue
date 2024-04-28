@@ -1,13 +1,39 @@
 <!-- 友情链接模块 -->
 <template>
 <div class="tFriendsBox">
-    <h1>友链申请格式
-        <h3>        网站名称: 校园博客</h3>
-        <h3>网站地址: http://campusblog.rwchen.top </h3>
+    <h1>
+        <div>友链申请格式</div>
+        <h3>网站名称: 校园博客</h3>
+        <h3>网站链接: http://example.com </h3>
         <h3>网站描述: 校园博客网站</h3>
-        <h3>网站logo: https://gcxy.hbut.edu.cn/dfiles/12846/images/footer-logo.jpg</h3>
+        <h3>网站logo: http://example.img</h3>
+    </h1>
 
-</h1>
+
+    <div style="margin-top: 20px; margin-bottom: 25px;">  
+        <el-button type="primary" @click="dialogVisible = true" style="width: 970px;">添加友链</el-button>  
+            <el-dialog title="添加友链" :visible.sync="dialogVisible" :before-close="handleClose" width="50%">  
+                <el-form :model="form" ref="form" label-width="120px">  
+                    <el-form-item label="网站名称" >  
+                    <el-input v-model="form.name"></el-input>  
+                    </el-form-item>  
+                    <el-form-item label="网站链接" >
+                    <el-input v-model="form.address" type="url"></el-input>  
+                    </el-form-item> 
+                    <el-form-item label="网站描述" >  
+                    <el-input v-model="form.description"></el-input>  
+                    </el-form-item>  
+                    <el-form-item label="网站logo" >  
+                    <el-input v-model="form.logo" type="url"></el-input>  
+                    </el-form-item> 
+                </el-form>  
+                <span slot="footer" class="dialog-footer">  
+                    <el-button @click="dialogVisible = false">取 消</el-button>  
+                    <el-button type="primary" @click="submitForm()">确 定</el-button>  
+                </span>  
+            </el-dialog>
+    </div>
+
     <el-row>
         <el-col :span="12" class="tf-item" v-for="(item,index) in friendslink" :key="'f'+index">
             <a :href="item.address" target="_blank">
@@ -17,14 +43,23 @@
             </a>
         </el-col>
     </el-row>
+
 </div>
 </template>
 
 <script>
-import {getAllLink} from '../api/link.js'
+import {getAllLink, addLink } from '../api/link.js'
 export default {
     data() { //选项 / 数据
+
         return {
+            dialogVisible: false,  
+            form: {  
+                name: '',  
+                address: '',
+                description: '',
+                logo: ''
+            },
             friendslink:[]//友情链接
         }
     },
@@ -33,7 +68,27 @@ export default {
             getAllLink().then((response)=>{
                 this.friendslink = response
             })
-        }
+        },
+        handleClose(done) {  
+            this.$confirm('确认关闭?').then(_ => { 
+                done();  
+            }).catch(_ => {});  
+        },  
+        submitForm() {
+            var valid = this.form.name !== '' &&  this.form.address !== '' && this.form.description !== '' && this.form.logo !== '';
+
+            if (!valid) {
+                this.$message.error('提交失败, 存在内容为空!');  
+                return false
+            }
+
+            addLink(this.form).then(response => {  
+                this.$message.success('友链已申请，等待管理员审核!');
+                this.dialogVisible = false;  
+            }).catch(error => {  
+                this.$message.error('提交失败!');  
+            });
+        },
     },
     components: { //定义组件
 
@@ -45,6 +100,11 @@ export default {
 </script>
 
 <style>
+
+/* .el-input__inner {  
+  width: 300px;  
+}  */
+
 .tFriendsBox{
     background: #fff;
     padding:15px;

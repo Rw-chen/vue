@@ -129,6 +129,7 @@
       @current-change="getList"
       @size-change="getList"
     />
+    
     <!-- 添加或修改参数配置对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="600px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
@@ -215,13 +216,13 @@
         <el-row>
           <el-col :span="24">
             <el-form-item label="角色">
-              <el-select v-model="form.roleIds" multiple placeholder="请选择">
+              <el-select v-model="form.roleIds" placeholder="请选择" multiple @change="changeRolesId">
                 <el-option
                   v-for="item in roleOptions"
                   :key="item.id"
                   :label="item.roleName"
                   :value="item.id"
-                  :disabled="item.status == 1"
+                  :disabled="item.status == '1'"
                 />
               </el-select>
             </el-form-item>
@@ -248,6 +249,7 @@ import {
 }
 from '@/api/system/user'
 import {
+changeRoleStatus,
   listAllRole
 }
 from '@/api/system/role'
@@ -416,6 +418,9 @@ export default {
           this.$modal.msgSuccess('删除成功')
         })
         .catch(() => {})
+    },
+    changeRolesId() {
+      this.$forceUpdate();
     },
     /** 提交按钮 */
     submitForm: function() {

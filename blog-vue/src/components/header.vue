@@ -7,13 +7,23 @@
 				<!-- pc端导航 -->
 				<div class="headBox">
 					<el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" :router="true">
-						<el-menu-item index="/Home"><i class="fa fa-wa fa-home"></i> 首页</el-menu-item>
+						<el-menu-item index="/Home"><i class="fa fa-wa fa-home">首页</i></el-menu-item>
 						<el-submenu index="/Share">
-							<template slot="title"><i class="fa fa-wa fa-archive"></i> 分类</template>
+							<template slot="title"><i class="fa fa-wa fa-archive">分类</i></template>
 							<el-menu-item v-for="(item,index) in classListObj" :key="'class1'+index" :index="'/Share?classId='+item.id">{{item.name}}</el-menu-item>
 						</el-submenu>
-						<!-- <el-menu-item index="/Reward"><i class="fa fa-wa fa-cny"></i> 赞赏</el-menu-item> -->
-						<el-menu-item index="/Friendslink"><i class="fa fa-wa fa-users"></i>友链</el-menu-item>
+
+						<el-menu-item @click="goToLogin">  
+							  <i class="fa fa-wa fa-edit">写博文</i>
+						</el-menu-item>
+
+						<el-menu-item index="/Friendslink"><i class="fa fa-wa fa-users">友链</i></el-menu-item>
+
+						<el-menu-item index="/Notice">
+							<i class="fa fa-wa fa-bell">通告</i>
+						</el-menu-item>
+
+		
 
 						<div class="userInfo">
 							<div v-show="!haslogin" class="nologin">
@@ -42,13 +52,13 @@
 		</div>
 		<div class="h-information">
 
-                    <img :src="this.$store.state.themeObj.head_portrait?this.$store.state.themeObj.head_portrait:'static/img/school_logo.jfif'" alt="">
+            <img :src="this.$store.state.themeObj.head_portrait?this.$store.state.themeObj.head_portrait:'static/img/school_logo.jfif'" alt="">
 
 			<h2 class="h-description">
+				{{this.$store.state.themeObj.autograph?this.$store.state.themeObj.autograph:"劝君珍惜大学时，鹏程万里奋今朝"}}
 
-                        {{this.$store.state.themeObj.autograph?this.$store.state.themeObj.autograph:"劝君珍惜大学时，鹏程万里奋今朝"}}
+            </h2>
 
-                </h2>
 		</div>
 	</div>
 </div>
@@ -80,6 +90,10 @@ export default {
 
 	},
 	methods: { //事件处理器
+		goToLogin() {
+			window.open('http://localhost:8081', '_blank');  
+			// window.location.href = 'http://localhost:8081'
+		},
 		handleOpen(key, keyPath) { //分组菜单打开
 			// console.log(key, keyPath);
 		},
